@@ -6,17 +6,17 @@
 <title>AI Vocational Training Prototype</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin:0; padding:0; font-family: 'Inter', sans-serif; }
-  body { background: #f0f4f8; color: #1f2937; }
-  header { text-align:center; padding:50px; background:linear-gradient(135deg,#4b6cb7,#182848); color:white; }
+  * { box-sizing:border-box; margin:0; padding:0; font-family:'Inter', sans-serif; }
+  body { background: #FFF9C4; color:#1f2937; }
+  header { text-align:center; padding:50px; background:white; color:#4b6cb7; border-bottom:4px solid #ff7f50; }
   header h1 { font-size:2.5rem; margin-bottom:10px; }
   header p { font-size:1.2rem; }
   section { max-width:1000px; margin:30px auto; padding:0 20px; }
   .trade-tabs { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:30px; }
   .trade-btn { padding:12px 20px; border:none; border-radius:8px; background:#e0e7ff; color:#1f2937; font-weight:600; cursor:pointer; transition:0.2s; }
   .trade-btn.active, .trade-btn:hover { background:#4b6cb7; color:white; }
-  .sim-area { position:relative; height:300px; border:2px solid #4b6cb7; border-radius:10px; background:white; margin-bottom:20px; }
-  .sim-point { width:30px; height:30px; border-radius:50%; background:#ff7f50; position:absolute; cursor:pointer; }
+  .sim-area { position:relative; height:300px; border:2px solid #4b6cb7; border-radius:10px; background:white; margin-bottom:20px; padding:10px; }
+  .sim-element { position:absolute; cursor:pointer; padding:6px 10px; border-radius:6px; background:#ff7f50; color:white; font-weight:600; }
   #instructions { margin-bottom:15px; font-weight:600; }
   .progress-bar { width:100%; background:#e5e7eb; border-radius:10px; height:20px; margin-top:10px; }
   .progress { height:100%; width:0%; background:#4b6cb7; border-radius:10px; transition:width 0.3s ease; }
@@ -32,7 +32,7 @@
 
 <header>
   <h1>AI Vocational Training Prototype</h1>
-  <p>Practice real-world skills interactively with AI guidance!</p>
+  <p>Learn trades interactively with AI guidance!</p>
 </header>
 
 <section>
@@ -42,7 +42,7 @@
     <button class="trade-btn" onclick="selectTrade('hvac', this)">HVAC Tech</button>
   </div>
 
-  <div id="instructions">Follow the steps to complete the task.</div>
+  <div id="instructions">Step 1: Start the simulation.</div>
   <div class="sim-area" id="simArea"></div>
   <div class="progress-bar"><div class="progress" id="progress"></div></div>
   <button class="reset-btn" onclick="resetSimulation()">Reset Simulation</button>
@@ -64,66 +64,68 @@
 let selectedTrade = 'welding';
 let currentStep = 0;
 let steps = [];
-let simPoints = [];
+let simElements = [];
 
 const trades = {
   welding: [
-    {top:50, left:50}, {top:50, left:200}, {top:150, left:350}, {top:250, left:500}, {top:250, left:650}
+    {text:"Pick the correct torch", top:50, left:50},
+    {text:"Set torch angle 45°", top:50, left:200},
+    {text:"Trace the weld seam", top:150, left:350},
+    {text:"Inspect the weld bead", top:250, left:500},
+    {text:"Cool down metal safely", top:250, left:650}
   ],
   electrician: [
-    {top:50, left:50}, {top:50, left:250}, {top:150, left:400}, {top:250, left:550}, {top:250, left:700}
+    {text:"Pick correct wire", top:50, left:50},
+    {text:"Connect terminals in order", top:50, left:250},
+    {text:"Check insulation", top:150, left:400},
+    {text:"Test circuit safety", top:250, left:550},
+    {text:"Close panel properly", top:250, left:700}
   ],
   hvac: [
-    {top:50, left:100}, {top:100, left:250}, {top:150, left:400}, {top:200, left:550}, {top:250, left:700}
-  ]
-};
-
-const tradeInstructions = {
-  welding: [
-    "Start welding at point 1", "Move to point 2 carefully", "Keep a steady hand to point 3",
-    "Almost done! Aim for point 4", "Final weld at point 5", "✅ Weld complete!"
-  ],
-  electrician: [
-    "Start wiring at point 1", "Connect to point 2 correctly", "Ensure safety at point 3",
-    "Almost done! Check connections at point 4", "Final connection at point 5", "✅ Circuit complete!"
-  ],
-  hvac: [
-    "Check thermostat at point 1", "Inspect ducts at point 2", "Check airflow at point 3",
-    "Ensure temperature at point 4", "Final inspection at point 5", "✅ HVAC check complete!"
+    {text:"Check thermostat", top:50, left:100},
+    {text:"Inspect ducts", top:100, left:250},
+    {text:"Adjust airflow", top:150, left:400},
+    {text:"Set correct temp", top:200, left:550},
+    {text:"Check pressure gauges", top:250, left:700}
   ]
 };
 
 function selectTrade(trade, btn) {
   selectedTrade = trade;
-  document.querySelectorAll('.trade-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.trade-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   resetSimulation();
 }
 
-function createSimPoints() {
+function createSimElements() {
   const simArea = document.getElementById('simArea');
   simArea.innerHTML = '';
-  simPoints = [];
-  trades[selectedTrade].forEach((pos, idx) => {
+  simElements = [];
+  trades[selectedTrade].forEach((el, idx) => {
     const div = document.createElement('div');
-    div.classList.add('sim-point');
-    div.style.top = pos.top + 'px';
-    div.style.left = pos.left + 'px';
+    div.classList.add('sim-element');
+    div.style.top = el.top + 'px';
+    div.style.left = el.left + 'px';
+    div.textContent = el.text;
     div.dataset.step = idx;
-    div.addEventListener('click', () => handlePointClick(idx, div));
+    div.addEventListener('click', () => handleClick(idx, div));
     simArea.appendChild(div);
-    simPoints.push(div);
+    simElements.push(div);
   });
 }
 
-function handlePointClick(step, div) {
+function handleClick(step, div) {
   if(step === currentStep) {
     div.style.background = '#4b6cb7';
     currentStep++;
-    document.getElementById('instructions').textContent = tradeInstructions[selectedTrade][currentStep] || "Task complete!";
+    if(currentStep<trades[selectedTrade].length){
+      document.getElementById('instructions').textContent = "Step " + (currentStep+1) + ": " + trades[selectedTrade][currentStep].text;
+    } else {
+      document.getElementById('instructions').textContent = "✅ Task complete!";
+    }
     updateProgress();
   } else {
-    document.getElementById('instructions').textContent = "⚠️ Click the points in order!";
+    document.getElementById('instructions').textContent = "⚠️ Do the steps in order!";
   }
 }
 
@@ -133,25 +135,23 @@ function updateProgress() {
 }
 
 function resetSimulation() {
-  currentStep = 0;
-  document.getElementById('instructions').textContent = tradeInstructions[selectedTrade][0];
-  createSimPoints();
+  currentStep=0;
+  document.getElementById('instructions').textContent = "Step 1: " + trades[selectedTrade][0].text;
+  createSimElements();
   updateProgress();
 }
 
 function signup() {
-  const email = document.getElementById('email').value;
-  if(!email) {
-    document.getElementById('signupMsg').textContent = "Please enter a valid email!";
+  const email=document.getElementById('email').value;
+  if(!email){
+    document.getElementById('signupMsg').textContent="Please enter a valid email!";
   } else {
-    document.getElementById('signupMsg').textContent = `Thanks! We'll notify you at ${email}`;
+    document.getElementById('signupMsg').textContent=`Thanks! We'll notify you at ${email}`;
   }
 }
 
-// Initialize
 resetSimulation();
 </script>
 
 </body>
 </html>
-
