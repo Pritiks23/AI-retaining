@@ -1,145 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Vocational Training Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background: #f0f4f8; color: #1f2937; line-height: 1.6; }
-    header { background: linear-gradient(135deg,#4b6cb7,#182848); color:white; text-align:center; padding:80px 20px; }
-    header h1 { font-size:2.8rem; margin-bottom:15px; }
-    header p { font-size:1.2rem; color:#e0e7ff; }
-    section { max-width:1100px; margin:50px auto; padding:0 20px; }
-    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; margin-top:40px; }
-    .feature { background:white; padding:25px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.1); transition:transform 0.3s ease; }
-    .feature:hover { transform:translateY(-5px); }
-    .feature h3 { color:#4b6cb7; margin-bottom:10px; }
-    .simulation { background:white; padding:30px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.1); margin-top:50px; text-align:center; }
-    .simulation h2 { margin-bottom:20px; color:#4b6cb7; }
-    .trades { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:20px; }
-    .trade-btn { padding:12px 20px; border:none; border-radius:8px; background:#e0e7ff; color:#1f2937; cursor:pointer; font-weight:600; transition:0.2s; }
-    .trade-btn:hover, .trade-btn.active { background:#4b6cb7; color:white; }
-    .sim-output { margin-top:20px; font-size:1.1rem; font-weight:600; min-height:40px; }
-    .progress-bar { width:100%; background:#e5e7eb; border-radius:10px; overflow:hidden; margin-top:15px; height:20px; }
-    .progress { height:100%; width:0%; background:#4b6cb7; border-radius:10px; transition:width 0.4s ease; }
-    .cta { text-align:center; margin:60px 0; }
-    .cta input[type="email"] { padding:14px; width:280px; border-radius:8px; border:1px solid #ccc; margin-right:10px; font-size:1rem; }
-    .cta button { padding:14px 22px; font-size:1rem; border:none; border-radius:8px; background:#4b6cb7; color:white; cursor:pointer; transition:0.2s; }
-    .cta button:hover { background:#3746a0; }
-    footer { text-align:center; padding:25px; background:#182848; color:white; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Vocational Training Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; font-family: 'Inter', sans-serif; }
+  body { background: #f0f4f8; color: #1f2937; }
+  header { text-align:center; padding:50px; background:linear-gradient(135deg,#4b6cb7,#182848); color:white; }
+  header h1 { font-size:2.5rem; margin-bottom:10px; }
+  header p { font-size:1.2rem; }
+  section { max-width:1000px; margin:30px auto; padding:0 20px; }
+  .trade-tabs { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:30px; }
+  .trade-btn { padding:12px 20px; border:none; border-radius:8px; background:#e0e7ff; color:#1f2937; font-weight:600; cursor:pointer; transition:0.2s; }
+  .trade-btn.active, .trade-btn:hover { background:#4b6cb7; color:white; }
+  .sim-area { position:relative; height:300px; border:2px solid #4b6cb7; border-radius:10px; background:white; margin-bottom:20px; }
+  .sim-point { width:30px; height:30px; border-radius:50%; background:#ff7f50; position:absolute; cursor:pointer; }
+  #instructions { margin-bottom:15px; font-weight:600; }
+  .progress-bar { width:100%; background:#e5e7eb; border-radius:10px; height:20px; margin-top:10px; }
+  .progress { height:100%; width:0%; background:#4b6cb7; border-radius:10px; transition:width 0.3s ease; }
+  button.reset-btn { padding:12px 20px; background:#ff7f50; border:none; border-radius:8px; color:white; cursor:pointer; font-weight:600; }
+  .cta { text-align:center; margin:50px 0; }
+  .cta input[type="email"] { padding:14px; width:280px; border-radius:8px; border:1px solid #ccc; margin-right:10px; font-size:1rem; }
+  .cta button { padding:14px 22px; font-size:1rem; border:none; border-radius:8px; background:#4b6cb7; color:white; cursor:pointer; transition:0.2s; }
+  .cta button:hover { background:#3746a0; }
+  footer { text-align:center; padding:25px; background:#182848; color:white; }
+</style>
 </head>
 <body>
-  <header>
-    <h1>AI Vocational Training Dashboard</h1>
-    <p>Learn in-demand physical skills fast with AI guidance and simulations.</p>
-  </header>
 
-  <section>
-    <h2>How It Works</h2>
-    <div class="features">
-      <div class="feature">
-        <h3>Personalized AI Coaching</h3>
-        <p>AI adapts to your skill level, guiding you step-by-step to mastery faster than traditional training.</p>
-      </div>
-      <div class="feature">
-        <h3>AR/VR Simulations</h3>
-        <p>Practice welding, plumbing, and electrical work in realistic virtual environments safely.</p>
-      </div>
-      <div class="feature">
-        <h3>Real-Time Feedback</h3>
-        <p>AI monitors your performance and gives instant corrections for precision and safety.</p>
-      </div>
-    </div>
+<header>
+  <h1>AI Vocational Training Prototype</h1>
+  <p>Practice real-world skills interactively with AI guidance!</p>
+</header>
 
-    <div class="simulation">
-      <h2>Mini Interactive Simulation</h2>
-      <div class="trades">
-        <button class="trade-btn active" onclick="selectTrade('Welder', this)">Welder</button>
-        <button class="trade-btn" onclick="selectTrade('Electrician', this)">Electrician</button>
-        <button class="trade-btn" onclick="selectTrade('HVAC Technician', this)">HVAC</button>
-      </div>
-      <button onclick="startSimulation()" style="padding:14px 25px; background:#ff7f50; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:600;">Start Simulation</button>
-      <div class="sim-output" id="simOutput"></div>
-      <div class="progress-bar">
-        <div class="progress" id="progress"></div>
-      </div>
-    </div>
+<section>
+  <div class="trade-tabs">
+    <button class="trade-btn active" onclick="selectTrade('welding', this)">Welder</button>
+    <button class="trade-btn" onclick="selectTrade('electrician', this)">Electrician</button>
+    <button class="trade-btn" onclick="selectTrade('hvac', this)">HVAC Tech</button>
+  </div>
 
-    <div class="cta">
-      <h2>Stay Updated</h2>
-      <p>Sign up for early access and updates:</p>
-      <input type="email" placeholder="Your email" id="email">
-      <button onclick="signup()">Sign Up</button>
-      <p id="signupMsg" style="margin-top:15px; font-weight:600;"></p>
-    </div>
-  </section>
+  <div id="instructions">Follow the steps to complete the task.</div>
+  <div class="sim-area" id="simArea"></div>
+  <div class="progress-bar"><div class="progress" id="progress"></div></div>
+  <button class="reset-btn" onclick="resetSimulation()">Reset Simulation</button>
+</section>
 
-  <footer>
-    &copy; 2025 AI Vocational Training Prototype
-  </footer>
+<div class="cta">
+  <h2>Stay Updated</h2>
+  <p>Sign up for early access and updates:</p>
+  <input type="email" placeholder="Your email" id="email">
+  <button onclick="signup()">Sign Up</button>
+  <p id="signupMsg" style="margin-top:15px; font-weight:600;"></p>
+</div>
 
-  <script>
-    let selectedTrade = 'Welder';
+<footer>
+  &copy; 2025 AI Vocational Training Prototype
+</footer>
 
-    function selectTrade(trade, btn) {
-      selectedTrade = trade;
-      document.querySelectorAll('.trade-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('simOutput').textContent = '';
-      document.getElementById('progress').style.width = '0%';
-    }
+<script>
+let selectedTrade = 'welding';
+let currentStep = 0;
+let steps = [];
+let simPoints = [];
 
-    function startSimulation() {
-      const steps = {
-        'Welder': [
-          "👋 Welcome, Welder! Let's practice welding today.",
-          "Hold the torch at a 45° angle.",
-          "Keep the weld bead steady along the joint.",
-          "Good job! Check your alignment.",
-          "Simulation complete. You're ready for the next challenge!"
-        ],
-        'Electrician': [
-          "👋 Welcome, Electrician! Let's wire a basic circuit.",
-          "Identify the positive and negative terminals.",
-          "Connect wires carefully, following the diagram.",
-          "Double-check all connections for safety.",
-          "Simulation complete. You're ready for the next challenge!"
-        ],
-        'HVAC Technician': [
-          "👋 Welcome, HVAC Tech! Let's inspect a heating system.",
-          "Check the thermostat and power supply.",
-          "Inspect ducts and filter conditions.",
-          "Ensure airflow and temperature are correct.",
-          "Simulation complete. You're ready for the next challenge!"
-        ]
-      };
+const trades = {
+  welding: [
+    {top:50, left:50}, {top:50, left:200}, {top:150, left:350}, {top:250, left:500}, {top:250, left:650}
+  ],
+  electrician: [
+    {top:50, left:50}, {top:50, left:250}, {top:150, left:400}, {top:250, left:550}, {top:250, left:700}
+  ],
+  hvac: [
+    {top:50, left:100}, {top:100, left:250}, {top:150, left:400}, {top:200, left:550}, {top:250, left:700}
+  ]
+};
 
-      const messages = steps[selectedTrade];
-      let i = 0;
-      const output = document.getElementById('simOutput');
-      const progress = document.getElementById('progress');
-      output.textContent = '';
-      progress.style.width = '0%';
+const tradeInstructions = {
+  welding: [
+    "Start welding at point 1", "Move to point 2 carefully", "Keep a steady hand to point 3",
+    "Almost done! Aim for point 4", "Final weld at point 5", "✅ Weld complete!"
+  ],
+  electrician: [
+    "Start wiring at point 1", "Connect to point 2 correctly", "Ensure safety at point 3",
+    "Almost done! Check connections at point 4", "Final connection at point 5", "✅ Circuit complete!"
+  ],
+  hvac: [
+    "Check thermostat at point 1", "Inspect ducts at point 2", "Check airflow at point 3",
+    "Ensure temperature at point 4", "Final inspection at point 5", "✅ HVAC check complete!"
+  ]
+};
 
-      const interval = setInterval(() => {
-        output.textContent = messages[i];
-        progress.style.width = `${((i+1)/messages.length)*100}%`;
-        i++;
-        if (i >= messages.length) clearInterval(interval);
-      }, 1500);
-    }
+function selectTrade(trade, btn) {
+  selectedTrade = trade;
+  document.querySelectorAll('.trade-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  resetSimulation();
+}
 
-    function signup() {
-      const email = document.getElementById("email").value;
-      if (!email) {
-        document.getElementById("signupMsg").textContent = "Please enter a valid email!";
-      } else {
-        document.getElementById("signupMsg").textContent = `Thanks! We'll notify you at ${email}`;
-      }
-    }
-  </script>
+function createSimPoints() {
+  const simArea = document.getElementById('simArea');
+  simArea.innerHTML = '';
+  simPoints = [];
+  trades[selectedTrade].forEach((pos, idx) => {
+    const div = document.createElement('div');
+    div.classList.add('sim-point');
+    div.style.top = pos.top + 'px';
+    div.style.left = pos.left + 'px';
+    div.dataset.step = idx;
+    div.addEventListener('click', () => handlePointClick(idx, div));
+    simArea.appendChild(div);
+    simPoints.push(div);
+  });
+}
+
+function handlePointClick(step, div) {
+  if(step === currentStep) {
+    div.style.background = '#4b6cb7';
+    currentStep++;
+    document.getElementById('instructions').textContent = tradeInstructions[selectedTrade][currentStep] || "Task complete!";
+    updateProgress();
+  } else {
+    document.getElementById('instructions').textContent = "⚠️ Click the points in order!";
+  }
+}
+
+function updateProgress() {
+  const progressBar = document.getElementById('progress');
+  progressBar.style.width = `${(currentStep/trades[selectedTrade].length)*100}%`;
+}
+
+function resetSimulation() {
+  currentStep = 0;
+  document.getElementById('instructions').textContent = tradeInstructions[selectedTrade][0];
+  createSimPoints();
+  updateProgress();
+}
+
+function signup() {
+  const email = document.getElementById('email').value;
+  if(!email) {
+    document.getElementById('signupMsg').textContent = "Please enter a valid email!";
+  } else {
+    document.getElementById('signupMsg').textContent = `Thanks! We'll notify you at ${email}`;
+  }
+}
+
+// Initialize
+resetSimulation();
+</script>
+
 </body>
 </html>
+
