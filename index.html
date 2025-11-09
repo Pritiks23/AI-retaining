@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Vocational Training Prototype</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      color: #333;
+      background: #f9f9f9;
+    }
+    header {
+      background: linear-gradient(135deg, #4b6cb7, #182848);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.2rem;
+    }
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .feature {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+    .feature h3 {
+      margin-top: 0;
+      color: #4b6cb7;
+    }
+    .cta {
+      text-align: center;
+      margin: 60px 0;
+    }
+    .cta input[type="email"] {
+      padding: 12px;
+      width: 250px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+      font-size: 1rem;
+    }
+    .cta button {
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #4b6cb7;
+      color: white;
+      cursor: pointer;
+    }
+    .simulation {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .simulation button {
+      padding: 15px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #ff7f50;
+      color: white;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #182848;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Retraining Workers for the AI Economy</h1>
+    <p>AI-powered vocational training for welders, electricians, HVAC techs, and more.</p>
+  </header>
+
+  <section>
+    <h2>How It Works</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Personalized AI Tutoring</h3>
+        <p>AI coaches adapt to each learner's pace, guiding them through real-world skills quickly and efficiently.</p>
+      </div>
+      <div class="feature">
+        <h3>AR/VR Simulations</h3>
+        <p>Practice welding, plumbing, and electrical work in safe virtual environments before stepping on the job site.</p>
+      </div>
+      <div class="feature">
+        <h3>Real-Time Feedback</h3>
+        <p>AI vision and voice assistants provide instant corrections, ensuring quality training without needing multiple human instructors.</p>
+      </div>
+    </div>
+
+    <div class="simulation">
+      <h2>Try a Mini Simulation</h2>
+      <p>Click below to see your AI coach in action:</p>
+      <button onclick="startSimulation()">Start Simulation</button>
+      <p id="simOutput" style="margin-top:20px; font-weight:bold;"></p>
+    </div>
+
+    <div class="cta">
+      <h2>Stay Updated</h2>
+      <p>Sign up to get updates and early access:</p>
+      <input type="email" placeholder="Your email" id="email">
+      <button onclick="signup()">Sign Up</button>
+      <p id="signupMsg" style="margin-top:15px; font-weight:bold;"></p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 AI Vocational Training Prototype
+  </footer>
+
+  <script>
+    function startSimulation() {
+      const messages = [
+        "👋 Hi! I'm your AI coach.",
+        "Let's practice welding today.",
+        "Remember to hold the torch at a 45° angle.",
+        "Great! You're improving already.",
+        "Simulation complete. You're ready for the next challenge!"
+      ];
+      let i = 0;
+      const output = document.getElementById("simOutput");
+      output.textContent = "";
+      const interval = setInterval(() => {
+        output.textContent = messages[i];
+        i++;
+        if (i >= messages.length) clearInterval(interval);
+      }, 1500);
+    }
+
+    function signup() {
+      const email = document.getElementById("email").value;
+      if (!email) {
+        document.getElementById("signupMsg").textContent = "Please enter a valid email!";
+      } else {
+        document.getElementById("signupMsg").textContent = `Thanks! We'll notify you at ${email}`;
+      }
+    }
+  </script>
+</body>
+</html>
