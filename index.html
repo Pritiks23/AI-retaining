@@ -3,133 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Vocational Training Prototype</title>
+  <title>AI Vocational Training Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      color: #333;
-      background: #f9f9f9;
-    }
-    header {
-      background: linear-gradient(135deg, #4b6cb7, #182848);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    header p {
-      margin: 10px 0 0;
-      font-size: 1.2rem;
-    }
-    section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-    .feature {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-    }
-    .feature:hover {
-      transform: translateY(-5px);
-    }
-    .feature h3 {
-      margin-top: 0;
-      color: #4b6cb7;
-    }
-    .cta {
-      text-align: center;
-      margin: 60px 0;
-    }
-    .cta input[type="email"] {
-      padding: 12px;
-      width: 250px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-right: 10px;
-      font-size: 1rem;
-    }
-    .cta button {
-      padding: 12px 20px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 6px;
-      background: #4b6cb7;
-      color: white;
-      cursor: pointer;
-    }
-    .simulation {
-      text-align: center;
-      margin-top: 40px;
-    }
-    .simulation button {
-      padding: 15px 25px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      background: #ff7f50;
-      color: white;
-      cursor: pointer;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #182848;
-      color: white;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background: #f0f4f8; color: #1f2937; line-height: 1.6; }
+    header { background: linear-gradient(135deg,#4b6cb7,#182848); color:white; text-align:center; padding:80px 20px; }
+    header h1 { font-size:2.8rem; margin-bottom:15px; }
+    header p { font-size:1.2rem; color:#e0e7ff; }
+    section { max-width:1100px; margin:50px auto; padding:0 20px; }
+    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; margin-top:40px; }
+    .feature { background:white; padding:25px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.1); transition:transform 0.3s ease; }
+    .feature:hover { transform:translateY(-5px); }
+    .feature h3 { color:#4b6cb7; margin-bottom:10px; }
+    .simulation { background:white; padding:30px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.1); margin-top:50px; text-align:center; }
+    .simulation h2 { margin-bottom:20px; color:#4b6cb7; }
+    .trades { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:20px; }
+    .trade-btn { padding:12px 20px; border:none; border-radius:8px; background:#e0e7ff; color:#1f2937; cursor:pointer; font-weight:600; transition:0.2s; }
+    .trade-btn:hover, .trade-btn.active { background:#4b6cb7; color:white; }
+    .sim-output { margin-top:20px; font-size:1.1rem; font-weight:600; min-height:40px; }
+    .progress-bar { width:100%; background:#e5e7eb; border-radius:10px; overflow:hidden; margin-top:15px; height:20px; }
+    .progress { height:100%; width:0%; background:#4b6cb7; border-radius:10px; transition:width 0.4s ease; }
+    .cta { text-align:center; margin:60px 0; }
+    .cta input[type="email"] { padding:14px; width:280px; border-radius:8px; border:1px solid #ccc; margin-right:10px; font-size:1rem; }
+    .cta button { padding:14px 22px; font-size:1rem; border:none; border-radius:8px; background:#4b6cb7; color:white; cursor:pointer; transition:0.2s; }
+    .cta button:hover { background:#3746a0; }
+    footer { text-align:center; padding:25px; background:#182848; color:white; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Retraining Workers for the AI Economy</h1>
-    <p>AI-powered vocational training for welders, electricians, HVAC techs, and more.</p>
+    <h1>AI Vocational Training Dashboard</h1>
+    <p>Learn in-demand physical skills fast with AI guidance and simulations.</p>
   </header>
 
   <section>
     <h2>How It Works</h2>
     <div class="features">
       <div class="feature">
-        <h3>Personalized AI Tutoring</h3>
-        <p>AI coaches adapt to each learner's pace, guiding them through real-world skills quickly and efficiently.</p>
+        <h3>Personalized AI Coaching</h3>
+        <p>AI adapts to your skill level, guiding you step-by-step to mastery faster than traditional training.</p>
       </div>
       <div class="feature">
         <h3>AR/VR Simulations</h3>
-        <p>Practice welding, plumbing, and electrical work in safe virtual environments before stepping on the job site.</p>
+        <p>Practice welding, plumbing, and electrical work in realistic virtual environments safely.</p>
       </div>
       <div class="feature">
         <h3>Real-Time Feedback</h3>
-        <p>AI vision and voice assistants provide instant corrections, ensuring quality training without needing multiple human instructors.</p>
+        <p>AI monitors your performance and gives instant corrections for precision and safety.</p>
       </div>
     </div>
 
     <div class="simulation">
-      <h2>Try a Mini Simulation</h2>
-      <p>Click below to see your AI coach in action:</p>
-      <button onclick="startSimulation()">Start Simulation</button>
-      <p id="simOutput" style="margin-top:20px; font-weight:bold;"></p>
+      <h2>Mini Interactive Simulation</h2>
+      <div class="trades">
+        <button class="trade-btn active" onclick="selectTrade('Welder', this)">Welder</button>
+        <button class="trade-btn" onclick="selectTrade('Electrician', this)">Electrician</button>
+        <button class="trade-btn" onclick="selectTrade('HVAC Technician', this)">HVAC</button>
+      </div>
+      <button onclick="startSimulation()" style="padding:14px 25px; background:#ff7f50; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:600;">Start Simulation</button>
+      <div class="sim-output" id="simOutput"></div>
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
     </div>
 
     <div class="cta">
       <h2>Stay Updated</h2>
-      <p>Sign up to get updates and early access:</p>
+      <p>Sign up for early access and updates:</p>
       <input type="email" placeholder="Your email" id="email">
       <button onclick="signup()">Sign Up</button>
-      <p id="signupMsg" style="margin-top:15px; font-weight:bold;"></p>
+      <p id="signupMsg" style="margin-top:15px; font-weight:600;"></p>
     </div>
   </section>
 
@@ -138,19 +82,51 @@
   </footer>
 
   <script>
+    let selectedTrade = 'Welder';
+
+    function selectTrade(trade, btn) {
+      selectedTrade = trade;
+      document.querySelectorAll('.trade-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('simOutput').textContent = '';
+      document.getElementById('progress').style.width = '0%';
+    }
+
     function startSimulation() {
-      const messages = [
-        "👋 Hi! I'm your AI coach.",
-        "Let's practice welding today.",
-        "Remember to hold the torch at a 45° angle.",
-        "Great! You're improving already.",
-        "Simulation complete. You're ready for the next challenge!"
-      ];
+      const steps = {
+        'Welder': [
+          "👋 Welcome, Welder! Let's practice welding today.",
+          "Hold the torch at a 45° angle.",
+          "Keep the weld bead steady along the joint.",
+          "Good job! Check your alignment.",
+          "Simulation complete. You're ready for the next challenge!"
+        ],
+        'Electrician': [
+          "👋 Welcome, Electrician! Let's wire a basic circuit.",
+          "Identify the positive and negative terminals.",
+          "Connect wires carefully, following the diagram.",
+          "Double-check all connections for safety.",
+          "Simulation complete. You're ready for the next challenge!"
+        ],
+        'HVAC Technician': [
+          "👋 Welcome, HVAC Tech! Let's inspect a heating system.",
+          "Check the thermostat and power supply.",
+          "Inspect ducts and filter conditions.",
+          "Ensure airflow and temperature are correct.",
+          "Simulation complete. You're ready for the next challenge!"
+        ]
+      };
+
+      const messages = steps[selectedTrade];
       let i = 0;
-      const output = document.getElementById("simOutput");
-      output.textContent = "";
+      const output = document.getElementById('simOutput');
+      const progress = document.getElementById('progress');
+      output.textContent = '';
+      progress.style.width = '0%';
+
       const interval = setInterval(() => {
         output.textContent = messages[i];
+        progress.style.width = `${((i+1)/messages.length)*100}%`;
         i++;
         if (i >= messages.length) clearInterval(interval);
       }, 1500);
